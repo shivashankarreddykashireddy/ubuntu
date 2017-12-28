@@ -1,31 +1,36 @@
-import { FirstService } from './0.services/first.service';
-import { SecondService } from './0.services/second.service';
-import { ThirdService } from './0.services/third.service';
-
+import { LoginDetailsService } from './service/login-details.service';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { Http, Response } from '@angular/http';
 
+import { NgModule, Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { FirstComponent } from './1.single-service-single-component/first/first.component';
-import { SecondComponent } from './2.single-service-two-components/second/second.component';
-import { ThirdComponent } from './2.single-service-two-components/third/third.component';
-import { FourthComponent } from './3.two-service-single-component/fourth/fourth.component';
-import { FifthComponent } from './4.data-from-json-to-service-to-component/fifth/fifth.component';
+import { LoginComponent } from './login/login.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FirstComponent,
-    SecondComponent,
-    ThirdComponent,
-    FourthComponent,
-    FifthComponent,
+    LoginComponent,
+    HomepageComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    MatInputModule,
+    MatButtonModule,
+    BrowserAnimationsModule,    
+    RouterModule.forRoot([
+      { path: "loginpage" , component: LoginComponent },
+      { path: "homepage" ,component: HomepageComponent },
+      { path: "" , redirectTo: "/loginpage" , pathMatch:"full" },
+      { path: "**" , redirectTo: "/loginpage" , pathMatch:"full" },
+    ])
   ],
-  providers: [FirstService, SecondService, ThirdService],
+  providers: [LoginDetailsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
